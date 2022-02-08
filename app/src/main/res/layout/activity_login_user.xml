@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sellybook.model.LoginUser">
+    tools:context="com.example.sellybook.LoginUser">
 
 
     <ImageView
         android:id="@+id/login_imageView"
         android:layout_width="0dp"
-        android:layout_height="336dp"
+        android:layout_height="330dp"
         app:layout_constraintBottom_toTopOf="@+id/welcome_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,15 +107,14 @@
 
     <ProgressBar
         android:id="@+id/login_progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+        style="?android:attr/progressBarStyle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginEnd="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="@+id/login_imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
