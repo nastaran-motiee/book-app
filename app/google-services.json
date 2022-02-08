@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "629883170755",
+    "project_id": "selly-book",
+    "storage_bucket": "selly-book.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629883170755:android:a1c37655937426c21d5776",
+        "android_client_info": {
+          "package_name": "com.example.sellybook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629883170755-6qed65q1t0ndo3s03fiqsmpu4v464dkr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sellybook",
+            "certificate_hash": "30842a6ef47d7993c7241c5164d4c7f6d928e112"
+          }
+        },
+        {
+          "client_id": "629883170755-q1oesqhglrnpb6bq70cug2g92ie94rec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6seJXPwHXH_mI35QK6aL50Lci2G3SEsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629883170755-q1oesqhglrnpb6bq70cug2g92ie94rec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
