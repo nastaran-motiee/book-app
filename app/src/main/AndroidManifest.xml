@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sellybook">
+    package="com.example.sellybook" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -8,13 +10,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SellyBook">
+        android:theme="@style/Theme.SellyBook" >
         <activity
-            android:name=".model.RegisterUser"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".model.LoginUser"
-            android:exported="true">
+            android:name=".RegisterUser"
+            android:exported="false" />
+        <activity
+            android:name=".LoginUser"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
