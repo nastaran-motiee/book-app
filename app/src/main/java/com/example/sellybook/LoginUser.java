@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.sellybook.model.Model;
 import com.example.sellybook.model.ModelFireBase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -60,7 +62,7 @@ public class LoginUser extends AppCompatActivity {
 
                 mProgressBar.setVisibility(View.VISIBLE);
                 //register the user in firebase
-                ModelFireBase.instance.getFirebaseAuthInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                Model.instance.getFireBaseAuthInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
@@ -86,7 +88,7 @@ public class LoginUser extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String mail = resetMail.getText().toString();
-                        ModelFireBase.instance.getFirebaseAuthInstance().sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        Model.instance.getFireBaseAuthInstance().sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(LoginUser.this, "Reset Link Sent To Your Email.", Toast.LENGTH_SHORT).show();

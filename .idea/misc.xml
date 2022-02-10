@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_login_user.xml" value="0.22587917042380523" />
-        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_main.xml" value="0.23037676609105182" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_main.xml" value="0.10130515848353014" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_register_user.xml" value="0.2546875" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/books_list_row.xml" value="0.2421875" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_all_books.xml" value="0.25" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_book_info.xml" value="0.1" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/register_page.xml" value="0.1" />
       </map>
     </option>

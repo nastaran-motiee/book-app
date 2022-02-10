@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.sellybook.model.Model;
 import com.example.sellybook.model.ModelFireBase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -56,12 +57,12 @@ public class RegisterUser extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
                 //register the user in firebase
-                ModelFireBase.instance.getFirebaseAuthInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                Model.instance.getFireBaseAuthInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterUser.this,"User Created.",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), RegisterUser.class));
+                            startActivity(new Intent(getApplicationContext(), LoginUser.class));
 
                         } else{
                             Toast.makeText(RegisterUser.this, "Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
@@ -69,6 +70,7 @@ public class RegisterUser extends AppCompatActivity {
                         }
                     }
                 });
+
 
             }
         });

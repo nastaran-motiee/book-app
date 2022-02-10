@@ -4,4 +4,6 @@
     <string name="welcome_to_selly_book">WELCOME TO SELLY BOOK</string>
     <string name="register">Register</string>
     <string name="forgot_password">Forgot Password?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
