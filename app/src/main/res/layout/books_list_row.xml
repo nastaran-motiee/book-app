@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/selectors"
-
+    android:background="@drawable/selector_list_row"
     >
 
 
@@ -22,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/book_character_image" />
-
+    <!--to change the color of the checkbox it is necessary to create a style and change the theme in the checkbox-->
     <CheckBox
         android:id="@+id/list_row_cb"
         android:layout_width="wrap_content"
@@ -30,10 +29,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/heart_shaped_cb"
+        android:button="@drawable/selector_heart_shaped_check_box"/>
 
     <TextView
         android:id="@+id/list_row_book_name_text_view"

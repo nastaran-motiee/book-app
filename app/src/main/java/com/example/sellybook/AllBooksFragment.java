@@ -42,10 +42,13 @@ public class AllBooksFragment extends Fragment {
         allBooksList.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-
         allBooksList.setLayoutManager(layoutManager);
         adapter = new BookListAdapter(data,inflater);
-        allBooksList.setAdapter(adapter);
+
+        if(data != null){
+            allBooksList.setAdapter(adapter);
+        }
+
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
