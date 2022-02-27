@@ -1,4 +1,4 @@
-package com.example.sellybook;
+package com.example.sellybook.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.sellybook.R;
 import com.example.sellybook.model.Model;
-import com.example.sellybook.model.ModelFireBase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

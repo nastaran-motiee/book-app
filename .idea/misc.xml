@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1365" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/add_a_picture_icon_foreground.xml" value="0.1355" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/heart_shaped_check_box_selector.xml" value="0.272" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/ic_heart_filled.xml" value="0.26" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/ic_heart_outlined.xml" value="0.1" />
@@ -13,12 +14,15 @@
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/selector_list_row.xml" value="0.1365" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/selectors.xml" value="0.272" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_login_user.xml" value="0.22587917042380523" />
-        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_main.xml" value="0.10130515848353014" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_main.xml" value="0.2671875" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_register_user.xml" value="0.2546875" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/books_list_row.xml" value="0.1" />
-        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_all_books.xml" value="0.25" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_add_book.xml" value="0.1" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_all_books.xml" value="0.1" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_blank.xml" value="0.1" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_book_info.xml" value="0.2546875" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/register_page.xml" value="0.1" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/menu/main.xml" value="0.10555555555555556" />
       </map>
     </option>
   </component>

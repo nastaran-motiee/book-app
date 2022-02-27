@@ -1,4 +1,4 @@
-package com.example.sellybook;
+package com.example.sellybook.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -15,8 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sellybook.R;
 import com.example.sellybook.model.Model;
-import com.example.sellybook.model.ModelFireBase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -67,7 +67,7 @@ public class LoginUser extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginUser.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         } else{
                             Toast.makeText(LoginUser.this, "Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }

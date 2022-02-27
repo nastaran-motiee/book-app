@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sellybook.LoginUser">
+    tools:context="com.example.sellybook.ui.LoginUser">
 
 
     <ImageView
@@ -29,7 +29,8 @@
         app:layout_constraintBottom_toTopOf="@+id/forgot_pasword_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password_et" />
+        app:layout_constraintTop_toBottomOf="@+id/login_password_et"
+        />
 
     <TextView
         android:id="@+id/forgot_pasword_tv"
@@ -115,6 +116,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/login_imageView" />
+        app:layout_constraintTop_toTopOf="@+id/login_imageView"
+        android:theme="@style/progress_bar"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
