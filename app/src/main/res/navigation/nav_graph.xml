@@ -29,5 +29,5 @@
         android:id="@+id/addBookFragment"
         android:name="com.example.sellybook.ui.AddBookFragment"
         android:label="Add  Book For Sale"
-        tools:layout="@layout/fragment_add_book" />
+        tools:layout="@layout/fragment_add_book" /><action android:id="@+id/action_global_allBooksFragment" app:destination="@id/allBooksFragment"/>
 </navigation>

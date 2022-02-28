@@ -1,5 +1,6 @@
 package com.example.sellybook.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -24,6 +25,9 @@ import com.example.sellybook.R;
 import com.example.sellybook.model.Book;
 import com.example.sellybook.model.Model;
 import com.google.protobuf.StringValue;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class AllBooksFragment extends Fragment {
     AllBooksFragmentViewModel viewModel;
@@ -81,6 +85,7 @@ public class AllBooksFragment extends Fragment {
                 refreshData();
 
             }
+
         });
 
         setHasOptionsMenu(true);
@@ -98,22 +103,22 @@ public class AllBooksFragment extends Fragment {
     }
 
     private void refreshData() {
-    //    swipeRefresh.setRefreshing(true);
+      swipeRefresh.setRefreshing(false);
 
-//
-    //    Model.instance.getAllBooks(new Model.getAllBooksListener() {
-//
-    //        @SuppressLint("NotifyDataSetChanged")
-    //        @Override
-    //        public void onComplete(List<Book> d) {
-    //            viewModel.setData(d);
-    //            adapter.notifyDataSetChanged();
-    //            progressBar.setVisibility(View.GONE);
-    //            swipeRefresh.setRefreshing(false);
-//
-    //        }
-//
-    //    });
+
+    //  Model.instance.getAllBooks(new Model.getAllBooksListener() {
+
+    //      @SuppressLint("NotifyDataSetChanged")
+    //      @Override
+    //      public void onComplete(List<Book> d) {
+    //          viewModel.setData(d);
+    //          adapter.notifyDataSetChanged();
+    //          progressBar.setVisibility(View.GONE);
+    //          swipeRefresh.setRefreshing(false);
+
+    //      }
+
+    //  });
     }
 
     //---------------------------------------------------------------------------------------------
@@ -138,6 +143,7 @@ public class AllBooksFragment extends Fragment {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position, v);
+
                         }
 //
                     }
@@ -154,6 +160,8 @@ public class AllBooksFragment extends Fragment {
 
                 }
             });
+
+
         }
 
 
@@ -161,6 +169,13 @@ public class AllBooksFragment extends Fragment {
             bookNameTv.setText(book.getName());
             priceTv.setText(book.price);
             cb.setChecked(book.isFlag());
+            String url = book.getBookImageURL();
+           if(url != null ){
+               Picasso.get()
+                       .load(url)
+                       .placeholder(R.drawable.book_character_image)
+                       .into(image);
+           }
 
 
         }
@@ -196,8 +211,11 @@ public class AllBooksFragment extends Fragment {
             if(viewModel.getData().getValue() != null){
                 return viewModel.getData().getValue().size();
             }
+
             return  0;
         }
+
+
 
     }
 }

@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.sellybook.MyApplication;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.FieldValue;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class Book {
 
     @PrimaryKey
     @NonNull
+    @DocumentId
     public String id = "";
     public String name = "";
     public String price = "";
@@ -30,19 +32,19 @@ public class Book {
     public String phone = "";
     public String address = "";
     public boolean cb = false;
+    String bookImageURL = "";
     Long lastUpdated = new Long(0);
-    //public ImageView selectImage;
 
     public Book() {
     }
 
-    public Book(String name, String id,String price, String author, boolean cb, ImageView selectImage) {
+    public Book(String name,String price, String phone, String address, boolean cb) {
         this.name = name;
-        this.id = id;
         this.price = price;
-        this.author = author;
         this.cb = cb;
-        //this.selectImage = selectImage;
+        this.phone = phone;
+        this.address = address;
+
     }
     public Book(String name, String id, String price, String author, String phone, boolean cb) {
         this.name = name;
@@ -52,6 +54,7 @@ public class Book {
         this.cb = cb;
         this.phone = phone;
     }
+
 
     public Long getLastUpdated() {
         return lastUpdated;
@@ -97,6 +100,14 @@ public class Book {
         this.cb = flag;
     }
 
+    public String getBookImageURL() {
+        return bookImageURL;
+    }
+
+    public void setBookImageURL(String bookImageURL) {
+        this.bookImageURL = bookImageURL;
+    }
+
     public Map<String, Object> toJason() {
         Map<String, Object> json = new HashMap<>();
         json.put(ID, getId());
@@ -106,6 +117,7 @@ public class Book {
         json.put("author", getAuthor());
         json.put("phone", getPhone());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
+        json.put("bookImageURL", bookImageURL);
         return json;
     }
 
@@ -121,8 +133,10 @@ public class Book {
         String phone = (String) json.get("phone");
         boolean flag = (boolean) json.get("flag");
         Book book = new Book(name, id, price, author, phone, flag);
+        String bookImageURL = (String)json.get("bookImageURL");
         Timestamp ts = (Timestamp) json.get(LAST_UPDATED);
         book.setLastUpdated(new Long(ts.getSeconds()));
+        book.setBookImageURL(bookImageURL);
         return book;
 
     }

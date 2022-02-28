@@ -20,6 +20,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
 
@@ -28,7 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.LoginUser"
-            android:exported="true" >
+            android:exported="true">
+
             <!--TODO: put intent filter here-->
         </activity>
     </application>

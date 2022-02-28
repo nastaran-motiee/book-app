@@ -11,12 +11,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/add_photo_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Click The image To Edit It"
-            android:textSize="24sp"
+            android:text="Click The Camera To Edit The Image"
+            android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_book_image_view" />
@@ -29,11 +30,13 @@
             android:layout_marginTop="1dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="#00FFFFFF"
-            android:src="@drawable/add_a_picture_icon_foreground"
+            android:src="@drawable/add_a_book_icon_for_ground"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
 
         <TextView
             android:id="@+id/add_name_tv"
@@ -178,6 +181,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/add__book_camera_btn"
+            android:backgroundTint="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_camera"
+            app:layout_constraintEnd_toEndOf="@+id/add_book_image_view"
+            app:layout_constraintTop_toTopOf="@+id/add_book_image_view" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

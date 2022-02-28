@@ -2,10 +2,12 @@ package com.example.sellybook.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +29,7 @@ public class RegisterUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mName = findViewById(R.id.register_name_et);
         mEmail = findViewById(R.id.register_email_et);
@@ -64,9 +66,11 @@ public class RegisterUser extends AppCompatActivity {
                             Toast.makeText(RegisterUser.this,"User Created.",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), LoginUser.class));
 
+
                         } else{
                             Toast.makeText(RegisterUser.this, "Error!" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-
+                            progressBar.setVisibility(View.INVISIBLE);
+                            return;
                         }
                     }
                 });
@@ -83,6 +87,15 @@ public class RegisterUser extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return false;
+
+    }
     @Override
     protected void onResume() {
         super.onResume();

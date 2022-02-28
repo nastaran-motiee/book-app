@@ -3,6 +3,7 @@ package com.example.sellybook.model;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -127,4 +128,12 @@ public class Model {
 
         });
     }
+
+    public interface  SaveImageListener{
+        void onComplete(String url);
+    }
+    public void saveImage(Bitmap bitmap, String id,SaveImageListener listener) {
+        modelFireBase.saveImage(bitmap,id, listener);
+    }
+
 }

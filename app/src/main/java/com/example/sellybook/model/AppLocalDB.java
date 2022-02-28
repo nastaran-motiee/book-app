@@ -5,7 +5,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import com.example.sellybook.MyApplication;
 
-@Database(entities = {Book.class}, version = 2)
+@Database(entities = {Book.class}, version = 13)
 abstract class AppLocalDbRepository extends RoomDatabase {
     public abstract BookDao bookDao();
 }

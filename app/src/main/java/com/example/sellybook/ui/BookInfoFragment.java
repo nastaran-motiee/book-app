@@ -17,12 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.sellybook.R;
 import com.example.sellybook.model.Book;
 import com.example.sellybook.model.Model;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,6 +43,7 @@ public class BookInfoFragment extends Fragment {
     Button editBtn;
     Book book;
     ProgressBar progressBar;
+    ImageView image;
 
 
 
@@ -64,6 +68,7 @@ public class BookInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
       view = inflater.inflate(R.layout.fragment_book_info, container, false);
+      //TODO)))))))))))))))))))))))))))))))
       String bookId = BookInfoFragmentArgs.fromBundle(getArguments()).getBookId();
       name = ((TextView) view.findViewById(R.id.book_info_name_tv));
       price = ((TextView) view.findViewById(R.id.book_info_price_tv));
@@ -72,6 +77,7 @@ public class BookInfoFragment extends Fragment {
       author = ((TextView) view.findViewById(R.id.book_info_author_tv));
       cb = ((CheckBox) view.findViewById(R.id.book_info_check_box));
       progressBar = view.findViewById(R.id.book_info_progress_bar);
+      image = view.findViewById(R.id.book_info_image_view);
       progressBar.setVisibility(view.VISIBLE);
       Model.instance.getBookById(bookId, (book)->{
             updateDisplay(book);
@@ -103,9 +109,13 @@ public class BookInfoFragment extends Fragment {
         name.setText(book.name);
         price.setText(book.price);
         author.setText(book.author);
+        if(book.getBookImageURL() != null){
+            Picasso.get()
+                    .load(book.getBookImageURL())
+                    .placeholder(R.drawable.book_character_image)
+                    .into(image);
+        }
         progressBar.setVisibility(View.GONE);
-
-
-
     }
+
 }
