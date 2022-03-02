@@ -37,17 +37,38 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <TextView
             android:id="@+id/add_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Name:"
+            android:text="Book Name:"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/add_name_et"
             app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/add_author_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Author:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/add_author_et"
+            app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/add_author_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/add_author_tv"
+            app:layout_constraintTop_toBottomOf="@+id/add_name_et" />
 
         <TextView
             android:id="@+id/add_price_tv"
@@ -63,19 +84,8 @@
         <TextView
             android:id="@+id/add_phone_tv"
             style="@style/add_book_tv"
-            android:text="Phone:"
+            android:text="Seller Phone:"
             app:layout_constraintBaseline_toBaselineOf="@+id/add_phone_et"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/add_address_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Address:"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/add_address_et"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
@@ -86,7 +96,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textLongMessage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/add_name_tv"
             app:layout_constraintTop_toBottomOf="@+id/add_photo_text_view" />
@@ -102,7 +112,7 @@
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/add_price_tv"
-            app:layout_constraintTop_toBottomOf="@+id/add_name_et" />
+            app:layout_constraintTop_toBottomOf="@+id/add_author_et" />
 
         <EditText
             android:id="@+id/add_phone_et"
@@ -117,43 +127,20 @@
             app:layout_constraintStart_toEndOf="@+id/add_phone_tv"
             app:layout_constraintTop_toBottomOf="@+id/add_price_et" />
 
-        <EditText
-            android:id="@+id/add_address_et"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/add_address_tv"
-            app:layout_constraintTop_toBottomOf="@+id/add_phone_et" />
-
-        <CheckBox
-            android:id="@+id/add_book_cb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:checked="false"
-            android:text="Checked"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_address_tv" />
-
         <Button
             android:id="@+id/add_book_cancel_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/purple_dark"
             android:text="Cancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/add_book_save_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_book_cb"
-            app:layout_constraintVertical_bias="0.832"
-            android:backgroundTint="@color/purple_dark"/>
+            app:layout_constraintTop_toBottomOf="@+id/add_phone_tv"
+            app:layout_constraintVertical_bias="0.832" />
 
         <Button
             android:id="@+id/add_book_save_button"
@@ -161,13 +148,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/purple_dark"
             android:text="Save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/add_book_cancel_button"
-            app:layout_constraintTop_toBottomOf="@+id/add_book_cb"
-            app:layout_constraintVertical_bias="0.832"
-            android:backgroundTint="@color/purple_dark"/>
+            app:layout_constraintStart_toEndOf="@+id/add_book_cancel_button" />
 
         <ProgressBar
             android:id="@+id/add_book_progress_bar"

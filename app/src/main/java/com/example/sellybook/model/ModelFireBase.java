@@ -6,18 +6,21 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.sellybook.MyApplication;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.core.ViewSnapshot;
@@ -37,35 +40,39 @@ public class ModelFireBase {
     private List<Book> data = new LinkedList<Book>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public final static ModelFireBase instance = new ModelFireBase();
+    FirebaseUser user;
+    String  currentUserId;
 
 
-    private ModelFireBase(){}
+
+    private ModelFireBase(){
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+    }
 
     public static void addBook(Book book, Model.AddBookListener listener) {
 
-       DocumentReference ref = ModelFireBase.instance.db.collection("books").document();
-
-       ref.set(book.toJason())
-               .addOnSuccessListener((successListener)->{
-                   book.setId(ref.toString());
-                   ModelFireBase.instance.db.collection("books").document(book.getId()).update("Id", book.getId());
-                   listener.onComplete();
-               })
-
-               .addOnFailureListener((e)->{
-                   Log.w("TAG", "Error adding document", e);
-
-               });
-       //ModelFireBase.instance.db.collection("books")
-       //       .document(book.getId()).set(book.toJason())
-       //       .addOnSuccessListener((successListener)->{
-       //           listener.onComplete();
-       //       })
-
-       //       .addOnFailureListener((e)->{
-       //           Log.w("TAG", "Error adding document", e);
-
-       //       });
+   //   DocumentReference ref = ModelFireBase.instance.db.collection("books").document();
+   //   book.setId(ref.toString());
+   //     Log.d("tah", "addBook: "+ref.toString());
+   //   ref.set(book.toJason())
+   //           .addOnSuccessListener((successListener)->{
+   //               ModelFireBase.instance.db.collection("books").document(book.getId()).set(book.toJason());
+   //               listener.onComplete();
+   //           })
+   //           .addOnFailureListener((e)->{
+   //               Log.w("TAG", "Error adding document", e);
+   //           });
+      ModelFireBase.instance.db.collection("books")
+             .document(book.getId()).set(book.toJason())
+             .addOnSuccessListener((successListener)->{
+                 listener.onComplete();
+             })
+             .addOnFailureListener((e)->{
+                 Log.w("TAG", "Error adding document", e);
+             });
 
 
         //TODO:)))))))))))))))
@@ -77,8 +84,8 @@ public class ModelFireBase {
          return FirebaseAuth.getInstance();
     }
 
-    //TODO: implement get all books since
     public void getAllBooks(Long since, Model.getAllBooksListener listener) {
+
         db.collection("books")
                 .whereGreaterThanOrEqualTo(Book.LAST_UPDATED, new Timestamp(since, 0))
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -106,6 +113,47 @@ public class ModelFireBase {
             }
         });
 
+
+
+
+    }
+
+    public interface GetUserUploadedBooksListener{
+        void onComplete(LinkedList<Book> books);
+    }
+
+    public void getUserUploadedBooks( GetUserUploadedBooksListener listener) {
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        currentUserId = user.getUid();
+        db.collection("this_user_uploads"+currentUserId)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                LinkedList<Book> booksList = new LinkedList<Book>();
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot doc: task.getResult()){
+                        Book b = Book.fromJson(doc.getData());
+                        if(b != null){
+                            booksList.add(b);
+                        }
+
+                    }
+                }else {
+
+                }
+                listener.onComplete(booksList);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                listener.onComplete(null);
+
+            }
+        });
+
+
+
+
     }
 
     public void getBookById(String bookId, Model.GetBookByIdListener listener) {
@@ -131,14 +179,19 @@ public class ModelFireBase {
         });
     }
 
-    public void saveImage(Bitmap bitmap, String id, Model.SaveImageListener listener) {
+    public void saveImage(Bitmap bitmap, Book book, Model.SaveImageListener listener) {
+
+        DocumentReference ref = ModelFireBase.instance.db.collection("books").document();
+        book.setId(ref.toString());
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference imageRef = storageRef.child("bookImage/" + id + ".jpg");
+        StorageReference imageRef = storageRef.child("bookImage/" + book.getId()+ ".jpg");
 
         // Get the data from an ImageView as bytes
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        if(bitmap!=null){
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        }
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = imageRef.putBytes(data);
@@ -151,12 +204,66 @@ public class ModelFireBase {
         });
     }
 
-    private void listenToBooks(){
 
+    public interface AddBookToUserUploadsListener {
+        void onComplete();
+    }
 
+    public void addBookToUserUploads(Book book, AddBookToUserUploadsListener listener) {
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        currentUserId = user.getUid();
+        CollectionReference users = ModelFireBase.instance.db.collection("users");
+        ModelFireBase.instance.db.collection("users")
+                .document(currentUserId).collection("this_user_uploads"+currentUserId).document(book.getId()).set(book.toJason())
+                .addOnSuccessListener((successListener)->{
+                    listener.onComplete();
+                })
+                .addOnFailureListener((e)->{
+                    Log.w("TAG", "Error adding document", e);
+                });
+    }
+
+    public interface AddBookToUsersFavoritesListener{
+        void onComplete();
+    }
+
+    public void addBookToUsersFavorites(Book book,AddBookToUsersFavoritesListener listener) {
+       user=FirebaseAuth.getInstance().getCurrentUser();
+       currentUserId = user.getUid();
+       CollectionReference users = ModelFireBase.instance.db.collection("users");
+
+                ModelFireBase.instance.db.collection("users")
+                        .document(currentUserId).collection("this_user_favorites").document(book.getId()).set(book.toJason())
+                        .addOnSuccessListener((successListener)->{
+                            listener.onComplete();
+                        })
+                        .addOnFailureListener((e)->{
+                            Log.w("TAG", "Error adding document", e);
+                        });
 
 
 
     }
+
+    public interface DeleteBookFromUsersFavorites{
+        void onComplete();
+    }
+
+    public void deleteBookFromUsersFavorites(Book book, DeleteBookFromUsersFavorites listener){
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        currentUserId = user.getUid();
+        ModelFireBase.instance.db.collection("users")
+                .document(currentUserId).collection("this_user_favorites").document(book.getId()).delete()
+                .addOnSuccessListener((successListener)->{
+                    listener.onComplete();
+                })
+                .addOnFailureListener((e)->{
+                    Log.w("TAG", "Error adding document", e);
+                });
+
+
+    }
+
+
 
 }

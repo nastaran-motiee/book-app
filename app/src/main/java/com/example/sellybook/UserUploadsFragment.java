@@ -1,8 +1,9 @@
-package com.example.sellybook.ui;
+package com.example.sellybook;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,32 +22,34 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.sellybook.AllBooksFragmentViewModel;
-import com.example.sellybook.R;
 import com.example.sellybook.model.Book;
 import com.example.sellybook.model.Model;
-import com.google.protobuf.StringValue;
+import com.example.sellybook.model.ModelFireBase;
+import com.example.sellybook.ui.AllBooksFragment;
+import com.example.sellybook.ui.AllBooksFragmentDirections;
 import com.squareup.picasso.Picasso;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class AllBooksFragment extends Fragment {
-    public AllBooksFragmentViewModel viewModel;
+
+public class UserUploadsFragment extends Fragment {
+    public UserUploadedBooksFragmentViewModel viewModel;
     ProgressBar progressBar;
-    MyAdapter adapter;
-    RecyclerView allBooksList;
+    UserBooksAdapter adapter;
+    RecyclerView userBooksList;
     View view;
     SwipeRefreshLayout swipeRefresh;
 
 
-    public AllBooksFragment() {
+    public UserUploadsFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        viewModel = new ViewModelProvider(this).get(AllBooksFragmentViewModel.class);
+        viewModel = new ViewModelProvider(this).get(UserUploadedBooksFragmentViewModel.class);
     }
 
     @Override
@@ -54,37 +58,36 @@ public class AllBooksFragment extends Fragment {
 
         // Inflate the layout for this fragment
 
-        view = inflater.inflate(R.layout.fragment_all_books, container, false);
-        allBooksList = view.findViewById(R.id.all_books_recyclerView);
-        allBooksList.setHasFixedSize(true);
-
+        view = inflater.inflate(R.layout.fragment_user_uploads, container, false);
+        userBooksList = view.findViewById(R.id.user_books_recyclerView);
+        userBooksList.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        allBooksList.setLayoutManager(layoutManager);
+        userBooksList.setLayoutManager(layoutManager);
 
 
-        progressBar = view.findViewById(R.id.all_books_progress_bar);
+        progressBar = view.findViewById(R.id.user_books_progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
-        adapter = new MyAdapter();
-        allBooksList.setAdapter(adapter);
+        adapter = new UserBooksAdapter();
+        userBooksList.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(int position, View v) {
                 Book book = viewModel.getData().getValue().get(position);
-                NavDirections action = AllBooksFragmentDirections.actionAllBooksFragmentToBookInfoFragment(book.getId());
-                Navigation.findNavController(view).navigate(action);
                 Log.d("TAG", "row was clicked " + viewModel.getData().getValue().get(position).getId());
             }
         });
 
-        swipeRefresh = view.findViewById(R.id.all_books_swipe_refresh);
+        swipeRefresh = view.findViewById(R.id.user_books_swipe_refresh);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Model.instance.reloadAllBooksList();
-                refreshData();
+                ModelFireBase.instance.getUserUploadedBooks((u)->{
+                    refreshData();
+
+                });
 
             }
 
@@ -96,7 +99,7 @@ public class AllBooksFragment extends Fragment {
             refreshData();
         }
 
-        viewModel.getData().observe(getViewLifecycleOwner(), (allBooksList)->{
+        viewModel.getData().observe(getViewLifecycleOwner(), (userBooksList)->{
             adapter.notifyDataSetChanged();
         });
 
@@ -105,33 +108,31 @@ public class AllBooksFragment extends Fragment {
     }
 
     private void refreshData() {
-      swipeRefresh.setRefreshing(false);
+        swipeRefresh.setRefreshing(false);
 
 
-    //  Model.instance.getAllBooks(new Model.getAllBooksListener() {
-//
-    //      @SuppressLint("NotifyDataSetChanged")
-    //     @Override
-    //      public void onComplete(List<Book> d) {
-    //
-    //          adapter.notifyDataSetChanged();
-    //          progressBar.setVisibility(View.GONE);
-    //          swipeRefresh.setRefreshing(false);
-//
-    //      }
-//
-    //  });
+         ModelFireBase.instance.getUserUploadedBooks(new ModelFireBase.GetUserUploadedBooksListener() {
+
+             public void onComplete(LinkedList<Book> d) {
+
+                 adapter.notifyDataSetChanged();
+                 progressBar.setVisibility(View.GONE);
+                 swipeRefresh.setRefreshing(false);
+
+             }
+
+          });
     }
 
     //---------------------------------------------------------------------------------------------
-     class MyViewHolder extends RecyclerView.ViewHolder {
+    class UserBooksViewHolder extends RecyclerView.ViewHolder {
         private final OnItemClickListener listener;
         TextView bookNameTv;
         TextView priceTv;
         CheckBox cb;
         ImageView image;
 
-        public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+        public UserBooksViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             bookNameTv = itemView.findViewById(R.id.list_row_book_name_text_view);
             priceTv = itemView.findViewById(R.id.list_row_price_text_view);
@@ -152,26 +153,26 @@ public class AllBooksFragment extends Fragment {
 //
                 }
             });
-          cb.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  int pos = getAdapterPosition();
-                  Book book = viewModel.getData().getValue().get(pos);
-                  if(cb.isChecked()){
-                      book.setFlag(true);
-                      Model.instance.addBookToUsersFavorites(new Book(book.getName(),book.getId(),book.getPrice(), book.getAuthor(),book.getPhone(),cb.isChecked(),book.getBookImageURL()),()->{
-                          Log.d("tag", book.getName()+"added to favorites");
-                      });
-                  }else{
-                      book.setFlag(false);
-                      Model.instance.deleteBookFromUsersFavorites(book,()->{
-                          Log.d("tag", book.getName()+"deleted from favorites");
-                      });
-                  }
+            cb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    Book book = viewModel.getData().getValue().get(pos);
+                    if(cb.isChecked()){
+                        book.setFlag(true);
+                        Model.instance.addBookToUsersFavorites(new Book(book.getName(),book.getId(),book.getPrice(), book.getAuthor(),book.getPhone(),cb.isChecked(),book.getBookImageURL()),()->{
+                            Log.d("tag", book.getName()+"added to favorites");
+                        });
+                    }else{
+                        book.setFlag(false);
+                        Model.instance.deleteBookFromUsersFavorites(book,()->{
+                            Log.d("tag", book.getName()+"deleted from favorites");
+                        });
+                    }
 
 
-              }
-          });
+                }
+            });
 
 
 
@@ -184,12 +185,12 @@ public class AllBooksFragment extends Fragment {
             priceTv.setText(book.price);
             cb.setChecked(book.isFlag());
             String url = book.getBookImageURL();
-           if(url !=null ){
-               Picasso.get()
-                       .load(url)
-                       .placeholder(R.drawable.book_character_image)
-                       .into(image);
-           }
+            if(url !=null ){
+                Picasso.get()
+                        .load(url)
+                        .placeholder(R.drawable.book_character_image)
+                        .into(image);
+            }
 
 
         }
@@ -198,7 +199,7 @@ public class AllBooksFragment extends Fragment {
         void onItemClick(int position, View view);
     }
 
-    public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    public class UserBooksAdapter extends RecyclerView.Adapter<UserBooksViewHolder> {
         private OnItemClickListener mlistener;
 
         void setOnItemClickListener(OnItemClickListener listener) {
@@ -207,15 +208,15 @@ public class AllBooksFragment extends Fragment {
 
         @NonNull
         @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public UserBooksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = getLayoutInflater();
             View rowView = inflater.inflate(R.layout.books_list_row, parent, false);
-            MyViewHolder viewHolder = new MyViewHolder(rowView, mlistener);
+            UserBooksViewHolder viewHolder = new UserBooksViewHolder(rowView,mlistener);
             return viewHolder;
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull UserBooksViewHolder holder, int position) {
             Book book = viewModel.getData().getValue().get(position);
             holder.bind(book);
         }

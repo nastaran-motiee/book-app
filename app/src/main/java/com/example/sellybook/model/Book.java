@@ -38,14 +38,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(String name,String price, String phone, String address, boolean cb) {
-        this.name = name;
-        this.price = price;
-        this.cb = cb;
-        this.phone = phone;
-        this.address = address;
 
-    }
+
     public Book(String name, String id, String price, String author, String phone, boolean cb) {
         this.name = name;
         this.id = id;
@@ -53,6 +47,16 @@ public class Book {
         this.author = author;
         this.cb = cb;
         this.phone = phone;
+    }
+
+    public Book(String name, String id, String price, String author, String phone, boolean cb, String bookImageURL) {
+        this.name = name;
+        this.id = id;
+        this.price = price;
+        this.author = author;
+        this.cb = cb;
+        this.phone = phone;
+        this.bookImageURL = bookImageURL;
     }
 
 

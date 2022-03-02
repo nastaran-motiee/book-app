@@ -45,6 +45,7 @@
         app:layout_constraintBottom_toTopOf="@+id/book_info_author_tv"
         app:layout_constraintTop_toBottomOf="@+id/book_info_image_view" />
 
+
     <TextView
         android:id="@+id/book_info_author_tv"
         android:layout_width="wrap_content"
@@ -73,7 +74,7 @@
         style="@style/book_info_first_column_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price"
+        android:text="Price:"
         app:layout_constraintBaseline_toBaselineOf="@+id/book_info_price_tv"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -82,7 +83,7 @@
         style="@style/book_info_second_column_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/book_info_address_tv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView10"
@@ -93,38 +94,9 @@
         style="@style/book_info_first_column_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seller Phone Number:"
+        android:text="Seller Phone:"
         app:layout_constraintBaseline_toBaselineOf="@+id/book_info_phone_tv"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/book_info_address_tv"
-        style="@style/book_info_second_column_tv"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/book_info_phone_tv" />
-
-    <TextView
-        android:id="@+id/textView12"
-        style="@style/book_info_first_column_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Address:"
-        app:layout_constraintBaseline_toBaselineOf="@+id/book_info_address_tv"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/book_info_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:button="@drawable/selector_heart_shaped_check_box"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

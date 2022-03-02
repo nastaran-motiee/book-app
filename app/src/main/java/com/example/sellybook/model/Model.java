@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -35,20 +36,19 @@ public class Model {
     }
 
     public void getAllBooks(getAllBooksListener listener) {
-        //        modelFirebase.getAllBooks(localLastUpdate, listener);
-//        MyApplication.executorService.execute(()->{
-//            List<Book> data = AppLocalDB.db.bookDao().getAll();
-//            MyApplication.mainHandler.post(()->{
-//                listener.onComplete(data);
-//            });
-//        });
+     //  MyApplication.executorService.execute(()->{
+     //      List<Book> data = AppLocalDB.db.bookDao().getAll();
+     //      MyApplication.mainHandler.post(()->{
+     //          listener.onComplete(data);
+     //      });
+     //  });
     }
 
 
     MutableLiveData<List<Book>> allBooksListLiveData = new MutableLiveData<List<Book>>();
 
 
-    private void reloadAllBooksList() {
+    public void reloadAllBooksList() {
         //1. get local last update
        Long localLastUpdate = Book.getLocalLastUpdated();
         //2. get all books record since local last update from firebase
@@ -68,16 +68,21 @@ public class Model {
                 Book.setLocalLastUpdated(loLastUpdate);
 
                 //5. return all the records to the caller
-
                 List<Book> bkList = AppLocalDB.db.bookDao().getAll();
                 allBooksListLiveData.postValue(bkList);
+
             });
+
 
         });
 
     }
 
+    MutableLiveData<List<Book>> userUploadedBooksListLiveData = new MutableLiveData<List<Book>>();
 
+    public LiveData<List<Book>> getAllUserUploaded() {
+        return userUploadedBooksListLiveData;
+    }
     public LiveData<List<Book>> getAll() {
         return allBooksListLiveData;
     }
@@ -98,6 +103,8 @@ public class Model {
      //      });
      //  });
     }
+
+
 
     public interface GetBookByIdListener {
         void onComplete(Book book);
@@ -122,18 +129,39 @@ public class Model {
         return null;
     }
 
-    public void updateBook(Book book) {
-        MyApplication.executorService.execute(() -> {
-            AppLocalDB.db.bookDao().updateBook(book);
 
-        });
-    }
+
 
     public interface  SaveImageListener{
         void onComplete(String url);
     }
-    public void saveImage(Bitmap bitmap, String id,SaveImageListener listener) {
-        modelFireBase.saveImage(bitmap,id, listener);
+    public void saveImage(Bitmap bitmap, Book book,SaveImageListener listener) {
+        modelFireBase.saveImage(bitmap,book, listener);
+    }
+
+
+
+
+    public void addBookToUsersFavorites(Book book, ModelFireBase.AddBookToUsersFavoritesListener listener) {
+        MyApplication.executorService.execute(()->{
+                 AppLocalDB.db.bookDao().updateBook(book);
+                 MyApplication.mainHandler.post(()->{
+                     listener.onComplete();
+                 });
+             });
+
+        modelFireBase.addBookToUsersFavorites(book,listener);
+    }
+
+    public void deleteBookFromUsersFavorites(Book book, ModelFireBase.DeleteBookFromUsersFavorites listener){
+        MyApplication.executorService.execute(()->{
+            AppLocalDB.db.bookDao().updateBook(book);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete();
+            });
+        });
+      modelFireBase.deleteBookFromUsersFavorites(book,listener);
+
     }
 
 }

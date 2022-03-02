@@ -14,7 +14,12 @@
             app:destination="@id/bookInfoFragment" />
         <action
             android:id="@+id/action_allBooksFragment_to_addBookFragment"
-            app:destination="@id/addBookFragment" />
+            app:destination="@id/addBookFragment"
+            app:popUpTo="@id/addBookFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_allBooksFragment_to_userUploadsFragment"
+            app:destination="@id/userUploadsFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookInfoFragment"
@@ -30,4 +35,9 @@
         android:name="com.example.sellybook.ui.AddBookFragment"
         android:label="Add  Book For Sale"
         tools:layout="@layout/fragment_add_book" /><action android:id="@+id/action_global_allBooksFragment" app:destination="@id/allBooksFragment"/>
+    <fragment
+        android:id="@+id/userUploadsFragment"
+        android:name="com.example.sellybook.UserUploadsFragment"
+        android:label="Your Books On Sale"
+        tools:layout="@layout/fragment_user_uploads" />
 </navigation>

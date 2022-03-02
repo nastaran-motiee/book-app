@@ -16,13 +16,15 @@
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_login_user.xml" value="0.22587917042380523" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_main.xml" value="0.2671875" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/activity_register_user.xml" value="0.2546875" />
-        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/books_list_row.xml" value="0.1" />
-        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_add_book.xml" value="0.2546875" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/books_list_row.xml" value="0.2" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_add_book.xml" value="0.2608695652173913" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_all_books.xml" value="0.1" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_blank.xml" value="0.1" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_book_info.xml" value="0.2546875" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_favories.xml" value="0.2671875" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_user_uploads.xml" value="0.25" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/register_page.xml" value="0.1" />
-        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/menu/main.xml" value="0.10555555555555556" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/menu/main.xml" value="0.2671875" />
       </map>
     </option>
   </component>

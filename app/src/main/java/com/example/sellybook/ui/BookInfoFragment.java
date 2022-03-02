@@ -73,9 +73,7 @@ public class BookInfoFragment extends Fragment {
       name = ((TextView) view.findViewById(R.id.book_info_name_tv));
       price = ((TextView) view.findViewById(R.id.book_info_price_tv));
       phone = ((TextView) view.findViewById(R.id.book_info_phone_tv));
-      address = ((TextView) view.findViewById(R.id.book_info_address_tv));
       author = ((TextView) view.findViewById(R.id.book_info_author_tv));
-      cb = ((CheckBox) view.findViewById(R.id.book_info_check_box));
       progressBar = view.findViewById(R.id.book_info_progress_bar);
       image = view.findViewById(R.id.book_info_image_view);
       progressBar.setVisibility(view.VISIBLE);
@@ -104,11 +102,10 @@ public class BookInfoFragment extends Fragment {
 
     public void updateDisplay(Book book){
         this.book = book;
-        cb.setChecked(book.cb);
         phone.setText(book.phone);
         name.setText(book.name);
         price.setText(book.price);
-        author.setText(book.author);
+        author.setText("By "+book.author);
         if(book.getBookImageURL() != null){
             Picasso.get()
                     .load(book.getBookImageURL())

@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <!--ActionBar Font Style-->
         <item name="android:fontFamily">serif-monospace</item>
-        <item name="colorControlNormal">@color/purple_dark</item>
-        <item name="theme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:colorControlNormal">@color/purple_dark</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 </resources>
