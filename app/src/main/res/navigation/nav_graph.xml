@@ -39,5 +39,9 @@
         android:id="@+id/userUploadsFragment"
         android:name="com.example.sellybook.UserUploadsFragment"
         android:label="Your Books On Sale"
-        tools:layout="@layout/fragment_user_uploads" />
+        tools:layout="@layout/fragment_user_uploads" >
+        <action
+            android:id="@+id/action_userUploadsFragment_to_bookInfoFragment"
+            app:destination="@id/bookInfoFragment" />
+    </fragment>
 </navigation>

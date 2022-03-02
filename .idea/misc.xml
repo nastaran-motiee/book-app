@@ -6,6 +6,7 @@
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1365" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/add_a_picture_icon_foreground.xml" value="0.1355" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/heart_shaped_check_box_selector.xml" value="0.272" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.223" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/ic_heart_filled.xml" value="0.26" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/ic_heart_outlined.xml" value="0.1" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1365" />
@@ -24,7 +25,9 @@
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_favories.xml" value="0.2671875" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/fragment_user_uploads.xml" value="0.25" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/register_page.xml" value="0.1" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/layout/user_uploaded_list_row.xml" value="0.12993920972644377" />
         <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/menu/main.xml" value="0.2671875" />
+        <entry key="..\:/Users/nnast/AndroidStudioProjects/SellyBook/app/src/main/res/menu/popup_mrenu.xml" value="0.2671875" />
       </map>
     </option>
   </component>

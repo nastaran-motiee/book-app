@@ -1,6 +1,5 @@
 package com.example.sellybook;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -15,22 +14,20 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.sellybook.model.Book;
 import com.example.sellybook.model.Model;
 import com.example.sellybook.model.ModelFireBase;
-import com.example.sellybook.ui.AllBooksFragment;
 import com.example.sellybook.ui.AllBooksFragmentDirections;
 import com.squareup.picasso.Picasso;
-
-import java.util.LinkedList;
-import java.util.List;
 
 
 public class UserUploadsFragment extends Fragment {
@@ -40,6 +37,8 @@ public class UserUploadsFragment extends Fragment {
     RecyclerView userBooksList;
     View view;
     SwipeRefreshLayout swipeRefresh;
+    PopupMenu popupMenu;
+
 
 
     public UserUploadsFragment() {
@@ -76,6 +75,8 @@ public class UserUploadsFragment extends Fragment {
             @Override
             public void onItemClick(int position, View v) {
                 Book book = viewModel.getData().getValue().get(position);
+                NavDirections action = UserUploadsFragmentDirections.actionUserUploadsFragmentToBookInfoFragment(book.getId());
+                Navigation.findNavController(view).navigate(action);
                 Log.d("TAG", "row was clicked " + viewModel.getData().getValue().get(position).getId());
             }
         });
@@ -87,13 +88,14 @@ public class UserUploadsFragment extends Fragment {
                 ModelFireBase.instance.getUserUploadedBooks((bookLinkedList)->{
                     refreshData();
 
-                });;
+                });
 
             }
 
         });
 
         setHasOptionsMenu(true);
+
 
         if(viewModel.getData() == null){
             refreshData();
@@ -120,12 +122,14 @@ public class UserUploadsFragment extends Fragment {
         TextView priceTv;
         CheckBox cb;
         ImageView image;
+        ImageView imageMore;
 
         public UserBooksViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
+
+
             bookNameTv = itemView.findViewById(R.id.list_row_book_name_text_view);
             priceTv = itemView.findViewById(R.id.list_row_price_text_view);
-            cb = itemView.findViewById(R.id.list_row_cb);
             image = itemView.findViewById(R.id.list_row_imageView);
             this.listener = listener;
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -142,28 +146,50 @@ public class UserUploadsFragment extends Fragment {
 //
                 }
             });
-            cb.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    Book book = viewModel.getData().getValue().get(pos);
-                    if(cb.isChecked()){
-                        book.setFlag(true);
-                        Model.instance.addBookToUsersFavorites(new Book(book.getName(),book.getId(),book.getPrice(), book.getAuthor(),book.getPhone(),cb.isChecked(),book.getBookImageURL()),()->{
-                            Log.d("tag", book.getName()+"added to favorites");
-                        });
-                    }else{
-                        book.setFlag(false);
-                        Model.instance.deleteBookFromUsersFavorites(book,()->{
-                            Log.d("tag", book.getName()+"deleted from favorites");
-                        });
+         //  cb.setOnClickListener(new View.OnClickListener() {
+         //      @Override
+         //      public void onClick(View v) {
+         //          int pos = getAdapterPosition();
+         //          Book book = viewModel.getData().getValue().get(pos);
+         //          if(cb.isChecked()){
+         //              book.setFlag(true);
+         //              Model.instance.addBookToUsersFavorites(new Book(book.getName(),book.getId(),book.getPrice(), book.getAuthor(),book.getPhone(),cb.isChecked(),book.getBookImageURL()),()->{
+         //                  Log.d("tag", book.getName()+"added to favorites");
+         //              });
+         //          }else{
+         //              book.setFlag(false);
+         //              Model.instance.deleteBookFromUsersFavorites(book,()->{
+         //                  Log.d("tag", book.getName()+"deleted from favorites");
+         //              });
+         //          }
+
+
+         //      }
+         //  });
+            imageMore =itemView.findViewById(R.id.user_uploaded_list_row_pop_up_more);
+            imageMore.setOnClickListener(v -> {
+                popupMenu = new PopupMenu(imageMore.getContext(),imageMore);
+                popupMenu.inflate(R.menu.popup_menu);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.pop_up_delete:
+                                int pos = getAdapterPosition();
+                                Book book = viewModel.getData().getValue().get(pos);
+                                ModelFireBase.instance.deleteBook(book,()->{
+                                    Model.instance.reloadAllBooksList();
+
+                                });
+                                return true;
+                            default:
+                                return false;
+                        }
+
                     }
-
-
-                }
+                });
+                popupMenu.show();
             });
-
-
 
 
         }
@@ -172,7 +198,7 @@ public class UserUploadsFragment extends Fragment {
         public void bind(Book book) {
             bookNameTv.setText(book.getName());
             priceTv.setText(book.price);
-            cb.setChecked(book.isFlag());
+           // cb.setChecked(book.isFlag());
             String url = book.getBookImageURL();
             if(url !=null ){
                 Picasso.get()
@@ -199,7 +225,7 @@ public class UserUploadsFragment extends Fragment {
         @Override
         public UserBooksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = getLayoutInflater();
-            View rowView = inflater.inflate(R.layout.books_list_row, parent, false);
+            View rowView = inflater.inflate(R.layout.user_uploaded_list_row, parent, false);
             UserBooksViewHolder viewHolder = new UserBooksViewHolder(rowView,mlistener);
             return viewHolder;
         }

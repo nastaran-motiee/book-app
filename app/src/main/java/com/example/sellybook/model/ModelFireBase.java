@@ -231,6 +231,52 @@ public class ModelFireBase {
                 });
     }
 
+    //TODO:-------
+    public interface DeleteBook{
+        void onComplete();
+    }
+
+    public void deleteBook(Book book, DeleteBookFromUsersFavorites listener){
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        currentUserId = user.getUid();
+        ModelFireBase.instance.db.collection("users")
+                .document(currentUserId).collection("this_user_uploads"+currentUserId).document(book.getId()).delete()
+                .addOnSuccessListener((successListener)->{
+                    listener.onComplete();
+                })
+                .addOnFailureListener((e)->{
+                    Log.w("TAG", "Error adding document", e);
+                });
+        ModelFireBase.instance.db.collection("books")
+                .document(book.getId()).delete()
+                .addOnSuccessListener((successListener)->{
+                    listener.onComplete();
+                })
+                .addOnFailureListener((e)->{
+                    Log.w("TAG", "Error adding document", e);
+                });
+
+    //   MyApplication.executorService.execute(() -> {
+
+    //       Long loLastUpdate = new Long(0);
+    //           AppLocalDB.db.bookDao().insertAll(book);
+    //           if (book.getLastUpdated() > loLastUpdate) {
+    //               loLastUpdate = book.getLastUpdated();
+    //           }
+    //               Book.setLocalLastUpdated(loLastUpdate);
+    //       });
+
+     //  //5. return all the records to the caller
+     //  List<Book> bkList = AppLocalDB.db.bookDao().getAll();
+     //  Model.instance.allBooksListLiveData.postValue(bkList);
+
+        }
+
+
+
+
+    //TODO:____
+
     public interface AddBookToUsersFavoritesListener{
         void onComplete();
     }

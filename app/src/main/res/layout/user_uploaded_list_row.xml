@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_uploaded_list_row"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginBottom="1dp"
+    android:background="@drawable/selector_list_row">
+    <ImageView
+        android:id="@+id/list_row_imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/book_character_image" />
+    <!--to change the color of the checkbox it is necessary to create a style and change the theme in the checkbox-->
+
+    <ImageView
+        android:id="@+id/user_uploaded_list_row_pop_up_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
+    <TextView
+        android:id="@+id/list_row_book_name_text_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/list_row_price_text_view"
+        app:layout_constraintEnd_toStartOf="@+id/user_uploaded_list_row_pop_up_more"
+        app:layout_constraintStart_toEndOf="@+id/list_row_imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/list_row_price_text_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/user_uploaded_list_row_pop_up_more"
+        app:layout_constraintStart_toEndOf="@+id/list_row_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/list_row_book_name_text_view" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
