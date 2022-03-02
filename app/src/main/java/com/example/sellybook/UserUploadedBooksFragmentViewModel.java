@@ -10,7 +10,7 @@ import com.example.sellybook.model.ModelFireBase;
 import java.util.List;
 
 public class UserUploadedBooksFragmentViewModel extends ViewModel {
-    LiveData<List<Book>> data = Model.instance.getAllUserUploaded();
+    LiveData<List<Book>> data = ModelFireBase.instance.getAllUserUploaded();
 
 
     public LiveData<List<Book>> getData() {

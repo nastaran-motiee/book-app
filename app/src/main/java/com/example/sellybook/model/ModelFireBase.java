@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.sellybook.MyApplication;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -122,10 +124,15 @@ public class ModelFireBase {
         void onComplete(LinkedList<Book> books);
     }
 
+    MutableLiveData<List<Book>> userUploadedBooksListLiveData = new MutableLiveData<List<Book>>();
+    public LiveData<List<Book>> getAllUserUploaded() {
+        return userUploadedBooksListLiveData;
+    }
+
     public void getUserUploadedBooks( GetUserUploadedBooksListener listener) {
         user=FirebaseAuth.getInstance().getCurrentUser();
         currentUserId = user.getUid();
-        db.collection("this_user_uploads"+currentUserId)
+        db.collection("users").document(currentUserId).collection("this_user_uploads"+currentUserId)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -141,6 +148,7 @@ public class ModelFireBase {
                 }else {
 
                 }
+                userUploadedBooksListLiveData.postValue(booksList);
                 listener.onComplete(booksList);
             }
         }).addOnFailureListener(new OnFailureListener() {

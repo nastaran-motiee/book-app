@@ -84,10 +84,10 @@ public class UserUploadsFragment extends Fragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ModelFireBase.instance.getUserUploadedBooks((u)->{
+                ModelFireBase.instance.getUserUploadedBooks((bookLinkedList)->{
                     refreshData();
 
-                });
+                });;
 
             }
 
@@ -111,17 +111,6 @@ public class UserUploadsFragment extends Fragment {
         swipeRefresh.setRefreshing(false);
 
 
-         ModelFireBase.instance.getUserUploadedBooks(new ModelFireBase.GetUserUploadedBooksListener() {
-
-             public void onComplete(LinkedList<Book> d) {
-
-                 adapter.notifyDataSetChanged();
-                 progressBar.setVisibility(View.GONE);
-                 swipeRefresh.setRefreshing(false);
-
-             }
-
-          });
     }
 
     //---------------------------------------------------------------------------------------------

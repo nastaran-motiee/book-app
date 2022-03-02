@@ -78,11 +78,30 @@ public class Model {
 
     }
 
-    MutableLiveData<List<Book>> userUploadedBooksListLiveData = new MutableLiveData<List<Book>>();
+//  MutableLiveData<List<Book>> userUploadedBooksListLiveData = new MutableLiveData<List<Book>>();
+//  public void reloadUserUploadedBooksList() {
+//      //1. get local last update
+//      Long localLastUpdate = Book.getLocalLastUpdated();
+//      //2. get all books record since local last update from firebase
+//      modelFireBase.getUserUploadedBooks(localLastUpdate, (list) -> {
+//          MyApplication.executorService.execute(() -> {
+//              //3. update local last update date
+//              //4. add new records to local db
+//              Long loLastUpdate = new Long(0);
+//              Book.setLocalLastUpdated(loLastUpdate);
+//              //5. return all the records to the caller
+//              List<Book> bkList = AppLocalDB.db.bookDao().getAll();
+//              userUploadedBooksListLiveData.postValue(bkList);
 
-    public LiveData<List<Book>> getAllUserUploaded() {
-        return userUploadedBooksListLiveData;
-    }
+//          });
+
+
+//      });
+
+//  }
+
+
+
     public LiveData<List<Book>> getAll() {
         return allBooksListLiveData;
     }
