@@ -5,10 +5,12 @@ This is a simple Android application, which allows to publish books for sale.
 
 ## Demo
 
-<div align="left">
-    <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_151850.png" height="808" width="393"
+<div align="center">
+    <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_151850.png" height="728" width="313"
         alt="login screen" />
-    <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_161528.png"  height="808" width="393"
+     <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_164005.png" height="728" width="313"
+        alt="list screen" />
+    <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_161528.png"  height="728" width="313"
         alt="add book screen" />
 </div>
 
