@@ -1,15 +1,19 @@
 # Book App
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is a simple Android application, which allows users to manage their book collection.
+This is a simple Android application, which allows to publish books for sale.
+
+## Demo
 
 ## Features
 
+- **Sign Up & Login**: Users can sign up to the app and login using their email.
+- **Reset Password**: Users can reset their password.
 - **Add Books**: Users can add new books to their collection.
-- **View Books**: Users can view a list of all books in their collection.
-- **Edit Books**: Users can edit details of existing books.
-- **Delete Books**: Users can remove books from their collection.
+- **View Books**: Users can view a list of all books for sale.
+- **Add Favorites**: Users can add or remove books from their favorites collection.
 
-## Installation
+## Run Locally
 
 1. Clone the repository:
    ```bash

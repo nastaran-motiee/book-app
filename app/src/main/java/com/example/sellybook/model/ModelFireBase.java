@@ -131,6 +131,7 @@ public class ModelFireBase {
 
     public void getUserUploadedBooks( GetUserUploadedBooksListener listener) {
         user=FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
         currentUserId = user.getUid();
         db.collection("users").document(currentUserId).collection("this_user_uploads"+currentUserId)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -146,7 +147,9 @@ public class ModelFireBase {
 
                     }
                 }else {
-
+                    // Handle the error appropriately
+                    // e.g., Log the error or show a message to the user
+                    Log.e("Firestore", "Error getting documents: ", task.getException());
                 }
                 userUploadedBooksListLiveData.postValue(booksList);
                 listener.onComplete(booksList);
