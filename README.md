@@ -5,6 +5,13 @@ This is a simple Android application, which allows to publish books for sale.
 
 ## Demo
 
+<div align="left">
+    <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_151850.png" height="808" width="393"
+        alt="login screen" />
+    <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_161528.png"  height="808" width="393"
+        alt="add book screen" />
+</div>
+
 ## Features
 
 - **Sign Up & Login**: Users can sign up to the app and login using their email.
