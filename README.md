@@ -13,12 +13,15 @@ Book App is an Android application designed to publish books for sale, provides 
 
 ## Demo
 
-<div align="center">
-    <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_151850.png" height="808" width="393"
-        alt="login screen" />
-      <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_161528.png"  height="808" width="393"
+<div align="center" display="flex" justify-content="space-between" >
+    <p style="color:#DE4376"> Hello</p>
+    <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_151850.png"  width= 33%
+  height= "auto" alt="login screen" />
+      <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_161528.png"  width= 33%
+  height= "auto"
         alt="add book screen" />
-     <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_164005.png" height="808" width="393"
+     <img src="https://github.com/nastaran-motiee/book-app/blob/master/demo/Screenshot_20240908_164005.png"  width= 33%
+  height= "auto"
         alt="list screen" />
 </div>
 
